@@ -1,0 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@screen 2xl {
+  html {
+    font-size: 18px;
+  }
+}
+
+
+@layer utilities {
+  .text-n0 {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .text-n1 {
+    font-size: 1.125rem;
+  }
+
+  .text-n2 {
+    font-size: 1.312rem;
+  }
+
+  .text-n4 {
+    font-size: 1.75rem;
+  }
+
+  .text-n6 {
+    font-size: 2.375rem;
+  }
+
+  .text-n8 {
+    font-size: 3.125rem;
+  }
+
+  .text-n9 {
+    font-size: 3.750rem;
+
+  }
+
+  .text-n10 {
+    font-size: 4.188rem;
+    line-height: 1.038;
+  }
+
+
+
+.bg-primary {
+  background-color: var(--primary) !important
+}
+
+.bg-primary-content {
+  background-color: var(--primary-content)
+}
+
+.bg-primary-contrast {
+  background-color: var(--primary-contrast)
+}
+
+.bg-secondary {
+  background-color: var(--secondary)
+}
+
+.bg-secondary-content {
+  background-color: var(--secondary-content)
+}
+
+.bg-secondary-contrast {
+  background-color: var(--secondary-contrast)
+}
+
+.bg-secondary-contrast-70 {
+  background-color: var(--secondary-contrast-70)
+}
+
+.bg-tertiary {
+  background-color: var(--tertiary)
+}
+
+.bg-tertiary-content {
+  background-color: var(--tertiary-content)
+}
+
+.bg-tertiary-contrast {
+  background-color: var(--tertiary-contrast)
+}
+
+.bg-accent {
+  background-color: var(--accent) !important
+}
+
+.bg-accent-content {
+  background-color: var(--accent-content)
+}
+
+.bg-accent-contrast {
+  background-color: var(--accent-contrast)
+}
+
+.bg-nav-content {
+  background-color: var(--nav-content)
+}
+
+.bg-reverse {
+  background-color: var(--reverse)
+}
+
+.bg-reverse-content {
+  background-color: var(--reverse-content)
+}
+
+.bg-tone-contrast {
+  background-color: var(--tone-contrast)
+}
+
+.bg-tone-contrast-50 {
+  background-color: var(--tone-contrast-50)
+}
+
+.bg-tone-contrast-30 {
+  background-color: var(--tone-contrast-30)
+}
+
+.bg-tone-contrast-5 {
+  background-color: var(--tone-contrast-5)
+}
+
+.bg-error {
+  background-color: var(--error)
+}
+
+.bg-error-contrast {
+  background-color: var(--error-contrast)
+}
+
+.bg-success {
+  background-color: var(--success)
+}
+
+.bg-success-contrast {
+  background-color: var(--success-contrast)
+}
+
+.bg-warning {
+  background-color: var(--warning)
+}
+
+.bg-warning-contrast {
+  background-color: var(--warning-contrast)
+}
+
+.bg-transparent {
+  background-color: transparent
+}
+
+.text-primary {
+  color: var(--primary)
+}
+
+.text-primary-content {
+  color: var(--primary-content)
+}
+
+.text-secondary {
+  color: var(--secondary)
+}
+
+.text-secondary-content {
+  color: var(--secondary-content)
+}
+
+.text-secondary-contrast {
+  color: var(--secondary-contrast)
+}
+
+.text-tertiary {
+  color: var(--tertiary)
+}
+
+.text-tertiary-content {
+  color: var(--tertiary-content)
+}
+
+.text-tertiary-contrast {
+  color: var(--tertiary-contrast)
+}
+
+.text-accent {
+  color: var(--accent)
+}
+
+.text-accent-content {
+  color: var(--accent-content)
+}
+
+.text-secondary-accent {
+  color: var(--secondary-accent)
+}
+
+.text-nav-content {
+  color: var(--nav-content)
+}
+
+.text-reverse {
+  color: var(--reverse)
+}
+
+.text-reverse-content {
+  color: var(--reverse-content)
+}
+
+.text-tone-contrast {
+  color: var(--tone-contrast)
+}
+
+.text-tone-contrast-50 {
+  color: var(--tone-contrast-50)
+}
+
+.text-tone-contrast-30 {
+  color: var(--tone-contrast-30)
+}
+
+.text-tone-contrast-5 {
+  color: var(--tone-contrast-5)
+}
+
+.text-error {
+  color: var(--error)
+}
+
+.text-error-contrast {
+  color: var(--error-contrast)
+}
+
+.text-success {
+  color: var(--success)
+}
+
+.text-warning {
+  color: var(--warning)
+}
+}
+
+@layer components {
+  .input {
+    @apply mt-2 relative flex bg-reverse flex-grow flex-row border items-center align-middle text-n0 font-normal whitespace-pre-line rounded-full px-5 pr-2 w-full focus:outline-none disabled:bg-tertiary py-2.5
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --primary: #ff733c;
+  --primary-contrast: #ff5a3c;
+  --primary-content: #1b1b1b;
+  --secondary: #5a698c;
+  --secondary-contrast: #414b6e;
+  --secondary-contrast-70: #414b6e70;
+  --secondary-content: #fff;
+  --tertiary: #dce6e6;
+  --tertiary-contrast: #cdd2dc;
+  --tertiary-content: #1b1b1b;
+  --accent: #32be50;
+  --accent-contrast: #289b50;
+  --accent-content: #1b1b1b;
+  --secondary-accent: #32be50;
+  --secondary-accent-contrast: #289b50;
+  --reverse: #fff;
+  --reverse-opacity-80: #ffffff80;
+  --reverse-content: #ff733c;
+  --nav: #ff733c;
+  --nav-contrast: #fff;
+  --nav-content: #1b1b1b;
+  --tone-contrast: #1b1b1b;
+  --tone-contrast-50: #545454;
+  --tone-contrast-30: #737373;
+  --tone-contrast-5: #e5e5e5;
+  --success: #32be50;
+  --success-contrast: #289b50;
+  --warning: #ffd250;
+  --warning-contrast: #f5b93c;
+  --error: #dc3545;
+  --error-contrast: #a11c29;
+  --font-text: 'Lato', "sans-serif";
+  --font-headline: "FortXCondensedExtraBold"
+}

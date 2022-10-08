@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer utilities {
+    .bg-sidecar-mobile {
+        background-image: url('/public/img/sidecar-mobile.jpeg');
+    }
+    
+    .bg-sidecar {
+        background-image: url('/public/img/sidecar.jpeg');
+    }
+  }

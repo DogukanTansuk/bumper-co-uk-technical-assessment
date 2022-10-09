@@ -1,7 +1,8 @@
 //Package Imports
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {persistReducer} from 'redux-persist'
-import storage from 'redux-persist/es/storage'
+import storage from 'redux-persist/lib/storage'
+
 
 //Feature Imports
 import {PartnerRegFormRequestModel, PartnerRegReducerModel} from './models'

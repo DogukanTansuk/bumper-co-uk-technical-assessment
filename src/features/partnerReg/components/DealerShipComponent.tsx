@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import {FC} from 'react'
 import {PartnerRegFormRequestModel} from '../models'
 
 interface DealerDealerShipComponentProps {
@@ -14,23 +14,39 @@ export const DealerShipComponent: FC<DealerDealerShipComponentProps> = ({partner
 
       <div className='card-body divide-y-2'>
         <div className='card-item'>
-          <span className='item-display'>Company</span>
-          <span className='item-value'>{company}</span>
+          <span data-testid='company-display' className='item-display'>
+            Company
+          </span>
+          <span data-testid='company-value' className='item-value'>
+            {company}
+          </span>
         </div>
 
         <div className='card-item'>
-          <span className='item-display'>Mobile phone number</span>
-          <span className='item-value'>{mobile_phone}</span>
+          <span data-testid='mobile-phone-number-display' className='item-display'>
+            Mobile phone number
+          </span>
+          <span data-testid='mobile-phone-number-value' className='item-value'>
+            {mobile_phone}
+          </span>
         </div>
 
         <div className='card-item'>
-          <span className='item-display'>Email address</span>
-          <span className='item-value'>{email_address}</span>
+          <span data-testid='email-address-display' className='item-display'>
+            Email address
+          </span>
+          <span data-testid='email-address-value' className='item-value'>
+            {email_address}
+          </span>
         </div>
 
         <div className='card-item'>
-          <span className='item-display'>Postcode</span>
-          <span className='item-value'>{postcode}</span>
+          <span data-testid='postcode-display' className='item-display'>
+            Postcode
+          </span>
+          <span data-testid='postcode-value' className='item-value'>
+            {postcode}
+          </span>
         </div>
 
         <div></div>

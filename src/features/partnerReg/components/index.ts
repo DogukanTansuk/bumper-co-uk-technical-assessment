@@ -1,2 +1,5 @@
 export * from './PartnerRegContent'
 export * from './PartnerRegForm'
+export * from './PartnerLoggedInComponent'
+export * from './DealerShipListComponent'
+export * from './DealerShipComponent'

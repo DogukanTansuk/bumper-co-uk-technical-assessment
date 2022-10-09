@@ -5,4 +5,4 @@ import {requests} from '../../../libs/axios'
 import {PartnerRegFormRequestModel} from '../models'
 
 export const DealerShip = (dealerShip: PartnerRegFormRequestModel) =>
-  requests.post<any>('auth/sign-in', dealerShip)
+  requests.post<any>('/dealership/reg/sandbox', dealerShip)

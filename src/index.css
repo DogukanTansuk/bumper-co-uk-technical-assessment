@@ -13,6 +13,10 @@
 
 
 @layer utilities {
+  .text-n-3 {
+    font-size: .625rem;
+  }
+
   .text-n0 {
     font-size: 1rem;
     font-weight: bold;
@@ -26,12 +30,20 @@
     font-size: 1.312rem;
   }
 
+  .text-n3 {
+    font-size: 1.562rem;
+  }
+
   .text-n4 {
     font-size: 1.75rem;
   }
 
   .text-n6 {
     font-size: 2.375rem;
+  }
+
+  .text-n7 {
+    font-size: 2.75rem;
   }
 
   .text-n8 {
@@ -250,6 +262,39 @@
 @layer components {
   .input {
     @apply mt-2 relative flex bg-reverse flex-grow flex-row border items-center align-middle text-n0 font-normal whitespace-pre-line rounded-full px-5 pr-2 w-full focus:outline-none disabled:bg-tertiary py-2.5
+  }
+
+  .input-error {
+    @apply text-n-3 whitespace-pre-line text-error h-1 ml-1 mt-0.5
+  }
+
+  .content {
+    @apply px-5 lg:px-0.5 container mx-auto max-w-3xl pt-6 md:pt-24 pb-6 flex flex-col justify-center text-left min-h-screen
+  }
+
+  .card {
+    @apply px-5 py-6 md:p-10 border border-black bg-reverse rounded-3xl p-1 justify-center text-left
+  }
+
+  .card-header {
+    @apply text-n1 whitespace-pre-line font-bold text-primary-content
+  }
+
+  .card-body {
+    @apply mt-3 space-y-3
+  }
+
+  .card-item {
+    @apply pt-4 flex flex-row w-full
+  }
+
+  .item-display {
+    @apply mr-auto
+  }
+
+  .item-value {
+    @apply ml-auto
+
   }
 }
 

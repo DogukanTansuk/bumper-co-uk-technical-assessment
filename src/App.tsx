@@ -11,17 +11,18 @@ import {AppRoutes} from './routes'
 // Packge Imports
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {fas} from '@fortawesome/free-solid-svg-icons'
+import { Outlet } from 'react-router-dom'
 
 library.add(fas)
 
 function App() {
   return (
-    <Suspense fallback={<>Loading</>}>
-      <div className='App'>
+    <div className='App'>
+      <Suspense fallback={<>Cindoruk</>}>
         <Navbar />
-        <AppRoutes />
-      </div>
-    </Suspense>
+        <Outlet />
+      </Suspense>
+    </div>
   )
 }
 

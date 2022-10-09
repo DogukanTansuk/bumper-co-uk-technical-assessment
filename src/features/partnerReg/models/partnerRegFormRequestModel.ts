@@ -3,7 +3,7 @@ export interface PartnerRegFormRequestModel {
   company: string
   mobile_phone: string
   email_address: string
-  postCode: string
+  postcode: string
   pay_later: string
   pay_now: string
 }

@@ -1,17 +1,22 @@
 // React Imports
 import React from 'react'
 
-//Package Imports
+// Package Imports
 import {createRoot} from 'react-dom/client'
 import {Provider} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
+import {PersistGate} from 'redux-persist/integration/react'
 
-//Util And Lib Imports
+// Util And Lib Imports
 import {store} from './libs/store'
+import {persistor} from './libs/persistor'
 
-//Component Imports and Style Imports
+// Component Imports and Style Imports
 import App from './App'
+
+// Style Imports
 import './index.css'
+import { AppRoutes } from './routes'
 
 const container = document.getElementById('root')!
 const root = createRoot(container)
@@ -19,9 +24,11 @@ const root = createRoot(container)
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <PersistGate persistor={persistor} loading={<div>Please Wait....</div>}>
+        <Provider store={store}>
+          <AppRoutes />
+        </Provider>
+      </PersistGate>
     </BrowserRouter>
   </React.StrictMode>
 )

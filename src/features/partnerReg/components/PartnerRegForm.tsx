@@ -1,45 +1,84 @@
 // React Imports
-import React from 'react'
+import {useState} from 'react'
+
+// Redux impors
+import {partnerRegAction} from '../partnerRegAction'
+
+// Hook Imports
+import {useAppDispatch} from '../../../hooks'
 
 // Package Imports
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {object, string} from 'yup'
 import {useFormik} from 'formik'
-import {useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import clsx from 'clsx'
+
+//Feature Imports
+import {PartnerRegFormRequestModel} from '../models'
 
 export const PartnerRegForm = () => {
   const navigate = useNavigate()
 
-  const initialValues = {
+  const dispatch = useAppDispatch()
+  const partnerRegistrationa = (partnerRegModel: PartnerRegFormRequestModel) =>
+    dispatch(partnerRegAction(partnerRegModel))
+
+  const [payLater, setPayLater] = useState('false')
+  const [payNow, setPaynow] = useState('false')
+
+  const initialValues: PartnerRegFormRequestModel = {
     name: '',
     company: '',
     mobile_phone: '',
     email_address: '',
-    postCode: '',
-    pay_later: '',
-    pay_now: '',
+    postcode: '',
+    pay_later: 'false',
+    pay_now: 'false',
   }
 
   const partnerRegSchema = object().shape({
-    name: string().required(),
-    company: string().required(),
-    mobile_phone: string().required(),
-    email_address: string().required(),
-    postCode: string().required(),
+    name: string()
+      .required('Please enter your name')
+      .max(255, 'Name must be at most 255 characters'),
+    company: string()
+      .required('Please enter company name')
+      .max(255, 'Name must be at most 255 characters'),
+    mobile_phone: string()
+      .required('Please enter mobile number')
+      .matches(/^0(\s*)(7)(\s*)(\d(\s*)){9}$/, 'Please enter mobile number'),
+    email_address: string()
+      .required('Please enter email')
+      .email('Please enter email')
+      .min(5, 'Email must be at least 5 characters')
+      .max(255, 'Name must be at most 255 characters'),
+    postcode: string()
+      .required('Must be a valid postcode')
+      .max(255, 'postcode must be at most 30 characters'),
     pay_later: string().required(),
-    pay_now: string().required(),
+    pay_now: string()
+      .required()
+      .when('pay_later', (pay_later): any => {
+        if (pay_later === 'false') {
+          return string().matches(/true/, 'You have to select at least one of the services')
+        }
+      }),
   })
 
-  const {handleSubmit, handleChange, values, errors} = useFormik({
+  const {handleSubmit, handleChange, handleBlur, values, errors, touched} = useFormik({
     initialValues: initialValues,
-    onSubmit: (values) => console.log(values),
+    onSubmit: (values) => {
+      partnerRegistrationa(values).then((res) => {
+        if (res) navigate('/partner/home')
+      })
+    },
     validationSchema: partnerRegSchema,
   })
 
   return (
     <main className='container-fluid bg-secondary'>
-      <div className='px-1 lg:px-0.5 container mx-auto max-w-3xl pt-6 md:pt-24 pb-4 flex flex-col justify-center text-left h-fit'>
-        <button className='text-left mt-12' onClick={() => navigate(-1)}>
+      <div className='content'>
+        <button className='text-left mt-16 md:mt-12' onClick={() => navigate(-1)}>
           <FontAwesomeIcon
             className='svg-inline--fa fa-arrow-left-long fa-1x text-secondary-content text-n4 cursor-pointer mb-1'
             icon='arrow-left-long'
@@ -71,7 +110,7 @@ export const PartnerRegForm = () => {
           </span>
         </div>
 
-        <div className='bg-card-primary px-5 py-1.5 md:p-10 border border-tone-contrast bg-reverse rounded-3xl p-1 justify-center text-left'>
+        <div className='card'>
           <p className='text-n1 whitespace-pre-line font-text font-bold leading-content text-primary-content'>
             Join our network
           </p>
@@ -87,13 +126,21 @@ export const PartnerRegForm = () => {
               </label>
 
               <input
+                type='text'
                 id='name'
-                className='input hover:shadow-hover focus-within:shadow-focus font-text border-error placeholder-tone-contrast-30'
+                className={clsx(
+                  'input hover:shadow-hover focus-within:shadow-focus font-text border-error placeholder-tone-contrast-30',
+                  {'border-red-500': errors.name && touched.name},
+                  {'border-green-500': !errors.name && touched.name}
+                )}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.name}
               />
 
-              <span
-                role='alert'
-                className='text-n-3 whitespace-pre-line font-text font-content leading-content text-error h-1 ml-1 mt-0.5'></span>
+              <span role='alert' className='input-error'>
+                {touched.name && errors.name && <>{errors.name}</>}
+              </span>
             </div>
 
             <div className='mb-1 mt-0.5'>
@@ -102,13 +149,21 @@ export const PartnerRegForm = () => {
               </label>
 
               <input
+                type='text'
                 id='company'
-                className='input hover:shadow-hover focus-within:shadow-focus font-text border-error placeholder-tone-contrast-30'
+                className={clsx(
+                  'input hover:shadow-hover focus-within:shadow-focus font-text border-error placeholder-tone-contrast-30',
+                  {'border-red-500': errors.company && touched.company},
+                  {'border-green-500': !errors.company && touched.company}
+                )}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.company}
               />
 
-              <span
-                role='alert'
-                className='text-n-3 whitespace-pre-line font-text font-content leading-content text-error h-1 ml-1 mt-0.5'></span>
+              <span role='alert' className='input-error'>
+                {touched.company && errors.company && <>{errors.company}</>}
+              </span>
             </div>
 
             <div className='mb-1 mt-0.5'>
@@ -117,13 +172,21 @@ export const PartnerRegForm = () => {
               </label>
 
               <input
-                id='mobile'
-                className='input hover:shadow-hover focus-within:shadow-focus font-text border-error placeholder-tone-contrast-30'
+                type='text'
+                id='mobile_phone'
+                className={clsx(
+                  'input hover:shadow-hover focus-within:shadow-focus font-text border-error placeholder-tone-contrast-30',
+                  {'border-red-500': errors.mobile_phone && touched.mobile_phone},
+                  {'border-green-500': !errors.mobile_phone && touched.mobile_phone}
+                )}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.mobile_phone}
               />
 
-              <span
-                role='alert'
-                className='text-n-3 whitespace-pre-line font-text font-content leading-content text-error h-1 ml-1 mt-0.5'></span>
+              <span role='alert' className='input-error'>
+                {touched.mobile_phone && errors.mobile_phone && <>{errors.mobile_phone}</>}
+              </span>
             </div>
 
             <div className='mb-1 mt-0.5'>
@@ -132,37 +195,101 @@ export const PartnerRegForm = () => {
               </label>
 
               <input
-                id='email'
-                className='input hover:shadow-hover focus-within:shadow-focus font-text border-error placeholder-tone-contrast-30'
+                type='text'
+                id='email_address'
+                className={clsx(
+                  'input hover:shadow-hover focus-within:shadow-focus font-text border-error placeholder-tone-contrast-30',
+                  {'border-red-500': errors.email_address && touched.email_address},
+                  {'border-green-500': !errors.email_address && touched.email_address}
+                )}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email_address}
               />
 
-              <span
-                role='alert'
-                className='text-n-3 whitespace-pre-line font-text font-content leading-content text-error h-1 ml-1 mt-0.5'></span>
+              <span role='alert' className='input-error'>
+                {touched.email_address && errors.email_address && <>{errors.email_address}</>}
+              </span>
             </div>
 
             <div className='mb-1 mt-0.5'>
-              <label className='text-n0 font-bold' htmlFor='postCode'>
+              <label className='text-n0 font-bold' htmlFor='postcode'>
                 <FontAwesomeIcon icon='house-chimney' className='mr-1 text-primary' /> Postcode
               </label>
 
               <input
-                id='postCode'
-                className='input hover:shadow-hover focus-within:shadow-focus font-text border-error placeholder-tone-contrast-30'
+                type='text'
+                id='postcode'
+                className={clsx(
+                  'input hover:shadow-hover focus-within:shadow-focus font-text border-error placeholder-tone-contrast-30',
+                  {'border-red-500': errors.postcode && touched.postcode},
+                  {'border-green-500': !errors.postcode && touched.postcode}
+                )}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.postcode}
               />
 
-              <span
-                role='alert'
-                className='text-n-3 whitespace-pre-line font-text font-content leading-content text-error h-1 ml-1 mt-0.5'></span>
+              <span role='alert' className='input-error'>
+                {touched.postcode && errors.postcode && <>{errors.postcode}</>}
+              </span>
+            </div>
+
+            <div className='mb-1 mt-0.5'>
+              <label className='text-n0 font-bold' htmlFor='postcode'>
+                <FontAwesomeIcon icon='wrench' className='mr-1 text-primary' /> What services are
+                you interested in?
+              </label>
+              <br />
+              <span className='text-tone-contrast-30 whitespace-pre-line leading-normal'>
+                Please select the services you’re interested in offering your customers
+              </span>
+
+              <div className='mt-3'>
+                <button
+                  id='pay_later'
+                  className='border border-black rounded-full px-5 md:px-3 py-2 text-n2'
+                  onClick={() => {
+                    values.pay_later === 'true'
+                      ? (values.pay_later = 'false')
+                      : (values.pay_later = 'true')
+
+                    setPayLater(payLater === 'true' ? 'false' : 'true')
+                  }}
+                  onBlur={handleBlur}>
+                  PayLater
+                  <FontAwesomeIcon className='ml-2' icon={payLater === 'true' ? 'minus' : 'plus'} />
+                </button>
+
+                <button
+                  id='pay_now'
+                  className='border border-black rounded-full px-5 md:px-3 py-2 text-n2 ml-2'
+                  onClick={() => {
+                    values.pay_now === 'true'
+                      ? (values.pay_now = 'false')
+                      : (values.pay_now = 'true')
+
+                    setPaynow(payNow === 'true' ? 'false' : 'true')
+                  }}
+                  onBlur={handleBlur}>
+                  PayNow
+                  <FontAwesomeIcon className='ml-2' icon={payNow === 'true' ? 'minus' : 'plus'} />
+                </button>
+              </div>
+
+              <span role='alert' className='input-error'>
+                {touched.pay_now && errors.pay_now && <>{errors.pay_now}</>}
+              </span>
             </div>
           </div>
 
-          <div className='mt-2 mb-1.5'>
+          <div className='mt-2 mb-3'>
             <button
+              type='submit'
               data-tip='true'
               data-for='Register'
               onClick={() => handleSubmit()}
-              className='group border rounded-full disabled:pointer-events-none disabled:cursor-not-allowed pointer-events-auto cursor-pointer py-0.5 px-1.5 bg-accent border-tone-contrast w-full'>
+              className='group border rounded-full disabled:pointer-events-none disabled:cursor-not-allowed pointer-events-auto cursor-pointer py-3 px-1.5 bg-accent border-tone-contrast w-full'>
               <p className='text-n0 whitespace-pre-line font-text font-content leading-content text-primary-content text-accent-content  group-hover:text-reverse  flex justify-center items-center flex-row '>
                 Register
                 <svg
@@ -183,9 +310,9 @@ export const PartnerRegForm = () => {
           </div>
           <p className='text-n0 whitespace-pre-line font-text font-content leading-content text-primary-content text-center'>
             Already registered?{' '}
-            <span className='hover:underline text-secondary-accent undefined'>
-              <a href='https://www.bumper.co.uk/login'>Login</a>
-            </span>
+            <Link to='/partner/home' className='hover:underline text-secondary-accent undefined'>
+              <span>Login</span>
+            </Link>
           </p>
         </div>
       </div>

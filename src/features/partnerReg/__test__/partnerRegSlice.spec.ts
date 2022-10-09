@@ -1,5 +1,5 @@
 // Feature Imports
-import {PartnerRegReducerModel} from './../models/partnerRegReducerModel'
+import {PartnerRegReducerModel} from '../models/partnerRegReducerModel'
 import partnerRegReducer, {addPartner} from '../partnerRegSlice'
 import {PartnerRegFormRequestModel} from '../models'
 import {fireEvent, screen} from '@testing-library/react'

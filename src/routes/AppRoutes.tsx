@@ -5,9 +5,9 @@ import App from '../App'
 
 export const AppRoutes: FC = () => {
   const PartnerRegContent = lazy(
-    () => import('../features/partnerReg/components/PartnerRegContent')
+    () => import('../features/partnerReg/components/PartnerRegContentComponent')
   )
-  const PartnerRegForm = lazy(() => import('../features/partnerReg/components/PartnerRegForm'))
+  const PartnerRegForm = lazy(() => import('../features/partnerReg/components/PartnerRegFormComponent'))
   const PartnerLoggedIn = lazy(
     () => import('../features/partnerReg/components/PartnerLoggedInComponent')
   )

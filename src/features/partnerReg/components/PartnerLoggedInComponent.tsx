@@ -14,7 +14,7 @@ export const PartnerLoggedInComponent = () => {
     <main className='container-fluid bg-secondary'>
       <div className='content'>
         <div className='mb-5 flex flex-col space-y-1'>
-          <h3 className='text-n3 md:text-n4 lg:text-n6 font-bold text-secondary-content mb-0.5. whitespace-pre-line'>
+          <h3 className='mt-14 md:mt-1 text-n3 md:text-n4 lg:text-n6 font-bold text-secondary-content mb-0.5. whitespace-pre-line'>
             Interested Dealerships
           </h3>
         </div>

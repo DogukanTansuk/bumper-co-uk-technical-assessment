@@ -1,5 +1,5 @@
-export * from './PartnerRegContent'
-export * from './PartnerRegForm'
+export * from './PartnerRegContentComponent'
+export * from './PartnerRegFormComponent'
 export * from './PartnerLoggedInComponent'
 export * from './DealerShipListComponent'
 export * from './DealerShipComponent'

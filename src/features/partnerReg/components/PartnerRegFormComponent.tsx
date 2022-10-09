@@ -17,7 +17,7 @@ import clsx from 'clsx'
 //Feature Imports
 import {PartnerRegFormRequestModel} from '../models'
 
-export const PartnerRegForm = () => {
+export const PartnerRegFormComponent = () => {
   const navigate = useNavigate()
 
   const dispatch = useAppDispatch()
@@ -320,4 +320,4 @@ export const PartnerRegForm = () => {
   )
 }
 
-export default PartnerRegForm
+export default PartnerRegFormComponent

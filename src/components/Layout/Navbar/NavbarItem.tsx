@@ -12,12 +12,13 @@ import {IconProp} from '@fortawesome/fontawesome-svg-core'
 
 import '../../../index.css'
 
-interface NavbarItemProps extends PropsWithChildren {
+interface NavbarItemProps {
   href: string
   text?: string
   textClass?: string
   textContainerClass?: string
   icon?: IconProp
+  isMobile?: boolean
 }
 
 export const NavbarItem: FC<NavbarItemProps> = ({
@@ -26,13 +27,17 @@ export const NavbarItem: FC<NavbarItemProps> = ({
   textClass,
   textContainerClass,
   icon,
-  children,
+  isMobile = false,
 }) => {
   const {pathname} = useLocation()
   const isActive = checkIsActive(pathname, href)
 
   return (
-    <Link className='relative ml-5 z-10 ' to={`/${href}`}>
+    <Link
+      className={clsx('relative z-10', {
+        'ml-5': !isMobile,
+      })}
+      to={`/${href}`}>
       <span className='py-4 flex flex-col group cursor-pointer'>
         <span
           className={`inline-flex px-0.5 items-center space-x-0.5 whitespace-nowrap ${textContainerClass}`}>
@@ -41,16 +46,22 @@ export const NavbarItem: FC<NavbarItemProps> = ({
           {icon && <FontAwesomeIcon icon={icon} />}
         </span>
 
-        <span
-          className={clsx(
-            'absolute bottom-0 h-1 w-full rounded-t-2xl last',
-            {
-              'bg-nav-content': isActive,
-            },
-            {
-              'bg-transparent group-hover:bg-white': !isActive,
-            }
-          )}></span>
+        {!isMobile && (
+          <span
+            className={clsx(
+              'absolute bottom-0 h-1 w-full rounded-t-2xl last',
+              {
+                'bg-nav-content': isActive,
+              },
+              {
+                'bg-transparent group-hover:bg-white': !isActive,
+              }
+            )}></span>
+        )}
+
+        {isMobile && (
+          <span className='bg-transparent group-hover:bg-reverse absolute -left-6 bottom-0 h-full w-2 rounded-r-2xl'></span>
+        )}
       </span>
     </Link>
   )

@@ -81,55 +81,15 @@ export const Navbar: FC = () => {
 
           {toggleMenu && (
             <div className='absolute left-0 w-full h-screen bg-primary z-0 pt-10 text-left'>
-              <div className='flex flex-col space-y-8 px-6 mt-5 mb-5'>
-                <a
-                  className='cursor-pointer relative flex flex-col py-1'
-                  href='https://www.bumper.co.uk/find-a-partner'>
-                  <span className='group'>
-                    <p className='text-n0 whitespace-pre-line font-text font-content leading-content text-primary-content whitespace-nowrap items-center space-x-0.5'>
-                      <span className='text-nav-content'>Apply</span>
-                    </p>
-                    <span className='bg-transparent group-hover:bg-reverse absolute -left-6 bottom-0 h-full w-2 rounded-r-2xl'></span>
-                  </span>
-                </a>
-                <a
-                  className=' cursor-pointer relative flex flex-col py-1'
-                  href='https://www.bumper.co.uk/howitworks'>
-                  <span className='group'>
-                    <p className='text-n0 whitespace-pre-line font-text font-content leading-content text-primary-content whitespace-nowrap items-center space-x-0.5'>
-                      <span className='text-nav-content'>How it works</span>
-                    </p>
-                    <span className='bg-transparent group-hover:bg-reverse absolute -left-6 bottom-0 h-full w-2 rounded-r-2xl'></span>
-                  </span>
-                </a>
-                <a
-                  className=' cursor-pointer relative flex flex-col py-1'
-                  href='https://www.bumper.co.uk/about'>
-                  <span className='group'>
-                    <p className='text-n0 whitespace-pre-line font-text font-content leading-content text-primary-content whitespace-nowrap items-center space-x-0.5'>
-                      <span className='text-nav-content'>About us</span>
-                    </p>
-                    <span className='bg-transparent group-hover:bg-reverse absolute -left-6 bottom-0 h-full w-2 rounded-r-2xl'></span>
-                  </span>
-                </a>
-                <a
-                  className=' cursor-pointer relative flex flex-col py-1'
-                  href='https://www.bumper.co.uk/blog'>
-                  <span className='group'>
-                    <p className='text-n0 font-text font-content leading-content text-primary-content whitespace-nowrap items-center space-x-0.5'>
-                      <span className='text-nav-content'>Blog</span>
-                    </p>
-                    <span className='bg-transparent group-hover:bg-reverse absolute -left-6 bottom-0 h-full w-2 rounded-r-2xl'></span>
-                  </span>
-                </a>
-              </div>
+              <NavbarLinks isMobile />
 
-              <div className='flex flex-col border-t mt-0.5 pt-1 px-1.5 space-y-1'>
-                <a
-                  className=' cursor-pointer relative flex flex-col py-1'
-                  href='https://www.bumper.co.uk/partner'>
+              <div className='flex flex-col border-t mt-0.5 pt-1 px-1.5 space-y-2'>
+                <Link
+                  className='mt-5 cursor-pointer relative flex flex-col py-1'
+                  onClick={toggleMenuAction}
+                  to='/partner'>
                   <span className='group'>
-                    <p className='text-n0 whitespace-pre-line font-text font-content leading-content text-primary-content whitespace-nowrap items-center space-x-0.5'>
+                    <p className='text-n0 px-5 whitespace-pre-line font-text font-content leading-content text-primary-content whitespace-nowrap items-center space-x-0.5'>
                       <span className='text-nav-content'>Partner sign up</span>
                       <svg
                         aria-hidden='true'
@@ -147,18 +107,19 @@ export const Navbar: FC = () => {
                     </p>
                     <span className='bg-transparent group-hover:bg-reverse absolute -left-6 bottom-0 h-full w-2 rounded-r-2xl'></span>
                   </span>
-                </a>
-                <a
-                  className=' cursor-pointer relative w-fit border rounded-full py-0.5 px-0.75'
-                  href='https://www.bumper.co.uk/login'>
+                </Link>
+                <Link
+                  className='ml-2 mt-14 border-black cursor-pointer relative w-fit border rounded-full py-0.5 px-0.75'
+                  onClick={toggleMenuAction}
+                  to='/partner'>
                   <span className='group'>
-                    <p className='text-n0 font-text font-content leading-content text-primary-content whitespace-nowrap items-center space-x-0.5'>
+                    <p className='text-n0 px-5 font-text font-content leading-content text-primary-content whitespace-nowrap items-center space-x-0.5'>
                       <span className='text-nav-content'>Partner login</span>
 
                       <FontAwesomeIcon className='tex' icon='warehouse' />
                     </p>
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
           )}

@@ -11,9 +11,6 @@ import {PersistGate} from 'redux-persist/integration/react'
 import {store} from './libs/store'
 import {persistor} from './libs/persistor'
 
-// Component Imports and Style Imports
-import App from './App'
-
 // Style Imports
 import './index.css'
 import { AppRoutes } from './routes'

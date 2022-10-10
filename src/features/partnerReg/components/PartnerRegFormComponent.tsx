@@ -1,5 +1,5 @@
 // React Imports
-import {useState} from 'react'
+import {FC, useState} from 'react'
 
 // Redux impors
 import {partnerRegAction} from '../partnerRegAction'
@@ -17,7 +17,7 @@ import clsx from 'clsx'
 //Feature Imports
 import {PartnerRegFormRequestModel} from '../models'
 
-export const PartnerRegFormComponent = () => {
+export const PartnerRegFormComponent: FC = () => {
   const navigate = useNavigate()
 
   const dispatch = useAppDispatch()
@@ -167,7 +167,7 @@ export const PartnerRegFormComponent = () => {
             </div>
 
             <div className='mb-1 mt-0.5'>
-              <label className='text-n0 font-bold' htmlFor='mobile'>
+              <label className='text-n0 font-bold' htmlFor='mobile_phone'>
                 <FontAwesomeIcon icon='mobile' className='mr-1 text-primary' /> Mobile phone number
               </label>
 
@@ -190,7 +190,7 @@ export const PartnerRegFormComponent = () => {
             </div>
 
             <div className='mb-1 mt-0.5'>
-              <label className='text-n0 font-bold' htmlFor='email'>
+              <label className='text-n0 font-bold' htmlFor='email_address'>
                 <FontAwesomeIcon icon='envelope' className='mr-1 text-primary' /> EMail address
               </label>
 
@@ -248,6 +248,8 @@ export const PartnerRegFormComponent = () => {
               <div className='mt-3'>
                 <button
                   id='pay_later'
+                  name='pay_later'
+                  role='button'
                   className='border border-black rounded-full px-5 md:px-3 py-2 text-n2'
                   onClick={() => {
                     values.pay_later === 'true'

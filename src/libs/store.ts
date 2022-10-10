@@ -1,9 +1,7 @@
 import {configureStore, ThunkAction, Action, combineReducers} from '@reduxjs/toolkit'
-import counterReducer from '../features/counter/counterSlice'
 import partnerRegReducer from '../features/partnerReg/partnerRegSlice'
 
 export const reducers = combineReducers({
-  counter: counterReducer,
   partnerReg: partnerRegReducer,
 })
 

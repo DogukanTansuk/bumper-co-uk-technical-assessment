@@ -13,6 +13,7 @@ export interface DealerShipListComponentProps {
 
 export const DealerShipListComponent: FC<DealerShipListComponentProps> = ({searchQuery}) => {
   const partners = useAppSelector(getPartners())
+  
   return (
     <>
       {partners
@@ -25,7 +26,10 @@ export const DealerShipListComponent: FC<DealerShipListComponentProps> = ({searc
           else if (searchQuery.length === 0) return partner
         })
         .map((partner) => (
-          <DealerShipComponent key={`partner_${partner.company}_${partner.mobile_phone}`} partner={partner} />
+          <DealerShipComponent
+            key={`partner_${partner.company}_${partner.mobile_phone}`}
+            partner={partner}
+          />
         ))}
     </>
   )

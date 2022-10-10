@@ -1,6 +1,6 @@
 // Package Imports
 import {Provider} from 'react-redux'
-import {getByLabelText, render, screen, fireEvent} from '@testing-library/react'
+import {render, screen, fireEvent, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import {BrowserRouter} from 'react-router-dom'
 
@@ -14,7 +14,6 @@ import {PartnerRegFormRequestModel, PartnerRegReducerModel} from '../models'
 // Adding Fontawesome Packages to Test
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {fas} from '@fortawesome/free-solid-svg-icons'
-import partnerRegReducer from '../partnerRegSlice'
 
 library.add(fas)
 
@@ -36,14 +35,15 @@ describe('renders PartnerRegFormComponent', () => {
   })
 
   it('it should register to system with example value', async () => {
-    render(
+    const handleSubmit = jest.fn()
+
+    const element = render(
       <Provider store={store}>
         <PartnerRegFormComponent />
       </Provider>,
       {wrapper: BrowserRouter}
     )
 
-    const actual = partnerRegReducer(initialState as any, {type: 'unknown'})
     const examplePartner: PartnerRegFormRequestModel = {
       name: 'Cindoruk',
       company: 'Hello',
@@ -54,7 +54,7 @@ describe('renders PartnerRegFormComponent', () => {
       pay_now: 'true',
     }
 
-    const {getByLabelText, getByText, getByRole, queryAllByText} = screen
+    const {getByLabelText, queryAllByText} = screen
 
     const {type, click} = userEvent.setup()
     await type(getByLabelText(/Name/i), examplePartner.name)
@@ -66,9 +66,11 @@ describe('renders PartnerRegFormComponent', () => {
     fireEvent.click(queryAllByText('PayLater')[0])
     fireEvent.click(queryAllByText('PayLater')[1])
 
-    const submitButton = getByText('Register')
-    await click(submitButton)
+    const submitButton = element.container.querySelector('button[type="submit"]')
+    await waitFor(() => {
+      click(submitButton!)
+    })
 
-    expect(actual.partners).toHaveLength(1)
+    expect(handleSubmit).toHaveBeenCalledWith(examplePartner)
   })
 })
